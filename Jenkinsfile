@@ -1,26 +1,15 @@
-library identifier: "pipeline-library@v1.5",
-retriever: modernSCM(
-  [
-    $class: "GitSCMSource",
-    remote: "https://github.com/missprempree/etax-api.git"
-  ]
-)
-
-appName = "etax-api"
-
 pipeline {
-    agent { label "maven" }
+    agent { label 'maven' }
     stages {
-        stage("Checkout") {
+        stage('Clone Repository') {
             steps {
-                checkout scm
+                git 'https://github.com/missprempree/etax-api.git'
             }
         }
         stage("Docker Build") {
             steps {
-                binaryBuild(buildConfigName: appName, buildFromPath: ".")
+                binaryBuild(buildConfigName: 'etax-api', buildFromPath: ".")
             }
         }
-
     }
 }
