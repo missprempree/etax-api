@@ -1,26 +1,26 @@
+library identifier: "pipeline-library@v1.5",
+retriever: modernSCM(
+  [
+    $class: "GitSCMSource",
+    remote: "https://github.com/missprempree/etax-api.git"
+  ]
+)
+
+appName = "etax-api"
+
 pipeline {
-    agent {
-        dockerfile {
-            filename 'DockerFile' // Path to your DockerFile in the repository
-            dir '.' // Directory where the Dockerfile is located
-            additionalBuildArgs '--no-cache' // Optional: Use if you want to avoid using cached layers
-        }
-    }
+    agent { label "maven" }
     stages {
-        stage('Clone Repository') {
+        stage("Checkout") {
             steps {
-                git 'https://github.com/missprempree/etax-api.git'
+                checkout scm
             }
         }
-        stage('Build Docker Image') {
+        stage("Docker Build") {
             steps {
-                script {
-                    // Build the Docker image using the Dockerfile
-                    def dockerImage = docker.build("etax-docker-image:${env.BUILD_NUMBER}")
-                    dockerImage.push("latest")
-                    dockerImage.push("${env.BUILD_NUMBER}")
-                }
+                binaryBuild(buildConfigName: appName, buildFromPath: ".")
             }
         }
+
     }
 }
