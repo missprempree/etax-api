@@ -8,7 +8,7 @@ pipeline {
         }
         stage("Docker Build") {
             steps {
-                binaryBuild(buildConfigName: 'etax-api', buildFromPath: ".")
+                binaryBuild(buildConfigName: 'etax', buildFromPath: ".")
             }
         }
     }
