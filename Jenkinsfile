@@ -14,15 +14,6 @@ pipeline {
             }
         }
 
-        stage('Get Version from POM') {
-            steps {
-                script {
-                    // Use Maven to read the version from the pom.xml file
-                    VERSION = sh(script: 'mvn help:evaluate -Dexpression=project.version -q -DforceStdout', returnStdout: true).trim()
-                    echo "Version: ${VERSION}"
-                }
-            }
-        }
 
         stage('Java Build') {
             steps {
@@ -32,7 +23,7 @@ pipeline {
         }
 
 		
-		stage('Docker Build') {
+	stage('Docker Build') {
             steps {
                 binaryBuild(buildConfigName: 'etax', buildFromPath: '.')
             }
