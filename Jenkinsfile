@@ -17,7 +17,7 @@ pipeline {
 	stage('Docker Build') {
 	    steps {
 	        script {
-	            sh 'oc start-build etax-api --from-dir=.'
+	            sh 'oc start-build etax --from-dir=.'
 	        }
 	    }
 	}
