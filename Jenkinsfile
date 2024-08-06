@@ -1,10 +1,13 @@
 pipeline {
-	agent {label 'maven'}
-
+    agent any
+    tools {
+        maven 'Maven 3.6.3' // Name of the Maven installation configured in Jenkins
+    }
+	
     stages {
 	   stage('Checkout') {
             steps {
-                git url: 'https://github.com/missprempree/etax-api.git', branch: 'master'
+                git url: 'https://github.com/missprempree/etax-api', branch: 'master'
             }
         }
 		
