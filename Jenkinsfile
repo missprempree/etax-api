@@ -16,10 +16,16 @@ pipeline {
 
 	stage('Install Maven') {
             steps {
-                sh '''
-                    sudo apt-get update
-                    sudo apt-get install -y maven
-                '''
+                script {
+                    // Define Maven version
+                    def mavenVersion = '4.0.0' // Change to the desired version
+
+                    // Install Maven using yum
+                    sh """
+                    yum install -y java-17
+                    yum install -y maven-$mavenVersion
+                    """
+                }
             }
         }
 
