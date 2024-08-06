@@ -14,9 +14,17 @@ pipeline {
             }
         }
 
+	stage('Install Maven') {
+            steps {
+                sh '''
+                    sudo apt-get update
+                    sudo apt-get install -y maven
+                '''
+            }
+        }
+
 	stage('Java Build') {
             steps {
-                // Run Maven build
                 sh 'mvn clean install'
             }
         }
