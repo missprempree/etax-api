@@ -14,6 +14,13 @@ pipeline {
             }
         }
 
+	stage('Java Build') {
+            steps {
+                // Run Maven build
+                sh 'mvn clean install'
+            }
+        }
+
 	stage('Docker Build') {
 	    steps {
 	        script {
