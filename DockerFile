@@ -1,13 +1,32 @@
-# Build the application first using Maven
-FROM maven:4-openjdk-17 as build
+# Use the official maven/Java 8 image to create a build artifact.
+FROM maven:3.8.1-openjdk-8 as builder
+
+# Set the working directory in the image
 WORKDIR /app
-COPY . .
+
+# Copy the pom.xml file to download dependencies
+COPY pom.xml .
+
+# Download the dependencies
 RUN mvn install
 
-# Inject the JAR file into a new container to keep the file small
-FROM openjdk:8-jre-alpine
+# Copy the rest of the application
+COPY src ./src
+
+# Build the application
+RUN mvn package
+
+# Use OpenJDK to run the application
+FROM openjdk:8-jdk-alpine
+
+# Set the working directory in the image
 WORKDIR /app
-COPY --from=build /app/target/etax-*.jar /app/app.jar
+
+# Copy the jar file from the builder stage
+COPY --from=builder /app/target/*.jar ./app.jar
+
+# Expose the port the app runs on
 EXPOSE 9005
-ENTRYPOINT ["sh", "-c"]
-CMD ["java -jar app.jar"]
+
+# Command to run the application
+CMD ["java", "-jar", "app.jar"]
