@@ -14,13 +14,13 @@ pipeline {
             }
         }
 
-		
 	stage('Docker Build') {
-            steps {
-                binaryBuild(buildConfigName: 'etax', buildFromPath: '.')
-            }
-        }
-
+	    steps {
+	        script {
+	            sh 'oc start-build etax-api --from-dir=.'
+	        }
+	    }
+	}
 		
     }
 
