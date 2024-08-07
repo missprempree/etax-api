@@ -14,7 +14,7 @@ pipeline {
             }
         }
 
-	stage("Docker Build") {
+	stage('Docker Build') {
             steps {
                sh '''
                    #oc start-build --from-build=<build_name>
@@ -25,9 +25,8 @@ pipeline {
 
 	stage('Build and Push Image') {
             steps {
-                script {
-                    // Create BuildConfig
-                    sh '''
+                // Create BuildConfig
+                sh '''
                     oc apply -f - <<EOF
                     apiVersion: build.openshift.io/v1
                     kind: BuildConfig
@@ -48,11 +47,9 @@ pipeline {
                         dockerStrategy:
                           dockerfilePath: Dockerfile
                     EOF
-                    '''
-
-                    // Start the build
-                    sh 'oc start-build etax --from-dir=. --follow'
-                }
+                '''
+                // Start the build
+                sh 'oc start-build etax --from-dir=. --follow'
             }
         }	    
     }
