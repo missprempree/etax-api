@@ -1,0 +1,22 @@
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  name: etax
+spec:
+  source:
+    type: Git
+    git:
+      uri: https://github.com/missprempree/etax-api.git
+  strategy:
+    type: Docker
+    dockerStrategy:
+      dockerfilePath: DockerFile
+  output:
+    to:
+      kind: DockerImage
+      name: docker.io/delenies/etax:latest
+  resources: {}
+  postCommit: {}
+  nodeSelector: null
+  triggers:
+    - type: ConfigChange
