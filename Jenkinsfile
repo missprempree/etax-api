@@ -17,7 +17,6 @@ pipeline {
 	stage('Docker Build') {
 	    steps {
 	        script {
-		    sh 'oc new-build --name=etax --binary --strategy=docker'
 	            sh 'oc start-build etax --from-dir=.'
 	        }
 	    }
