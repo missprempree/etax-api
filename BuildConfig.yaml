@@ -10,9 +10,10 @@ spec:
       kind: DockerImage
       name: docker.io/delenies/etax:latest
   source:
-    # Expect a local directory to be streamed to OpenShift as a build source
-    type: Binary
-    binary: {}
+    type: Git
+    git:
+      uri: https://github.com/missprempree/etax-api
+      ref: master
   strategy:
     type: Docker
     dockerStrategy:
