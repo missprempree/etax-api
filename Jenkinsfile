@@ -30,8 +30,6 @@ pipeline {
 apiVersion: build.openshift.io/v1
 kind: BuildConfig
 metadata:
-  labels:
-    app.kubernetes.io/name: etax
   name: etax
 spec:
   output:
