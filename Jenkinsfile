@@ -14,14 +14,14 @@ pipeline {
             }
         }
 
-	stage('Docker Build') {
-	    steps {
-	        script {
-	            sh 'oc start-build etax --from-dir=.'
-	        }
-	    }
-	}
-		
+	stage("Docker Build") {
+            steps {
+               sh '''
+                   #oc start-build --from-build=<build_name>
+                   oc start-build -F etax --from-dir=.
+               '''
+            }
+        }
     }
 
     post {
