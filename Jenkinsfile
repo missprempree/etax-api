@@ -27,9 +27,6 @@ pipeline {
             steps {
                 script {
                     // Use environment variables for credentials
-                    #def dockerHubUsername = credentials('dockerhub-username')
-                    #def dockerHubPassword = credentials('dockerhub-password')
-                    
                     sh '''
                         echo dckr_pat_2Rh4dvtW17yXDbN7rhQ5OEJZ_9U | docker login -u delenies --password-stdin
                     '''
