@@ -1,8 +1,8 @@
 pipeline {
     agent any
-	
+
     stages {
-	   stage('Checkout') {
+          stage('Checkout') {
             steps {
                 git url: 'https://github.com/missprempree/etax-api', branch: 'master'
             }
@@ -22,14 +22,39 @@ pipeline {
                '''
             }
         }
-    }
-
-    post {
-        success {
-            echo 'Pipeline completed successfully!'
+		
+        stage("Docker Login") {
+            steps {
+                script {
+                    // Use environment variables for credentials
+                    #def dockerHubUsername = credentials('dockerhub-username')
+                    #def dockerHubPassword = credentials('dockerhub-password')
+                    
+                    sh '''
+                        echo dckr_pat_2Rh4dvtW17yXDbN7rhQ5OEJZ_9U | docker login -u delenies --password-stdin
+                    '''
+                }
+            }
         }
-        failure {
-            echo 'Pipeline failed!'
+	    
+        stage("Docker Push") {
+            steps {
+                script {
+                    sh '''
+                        docker tag etax:latest delenies/etax:latest
+                        docker push delenies/etax:latest
+                    '''
+                }
+            }
         }
+		
+	post {
+	    success {
+		echo 'Pipeline completed successfully!'
+	    }
+	    failure {
+		echo 'Pipeline failed!'
+	    }
+	}
     }
 }
