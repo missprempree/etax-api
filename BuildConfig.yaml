@@ -1,22 +1,20 @@
 apiVersion: build.openshift.io/v1
 kind: BuildConfig
 metadata:
+  labels:
+    app.kubernetes.io/name: etax # your application name
   name: etax
 spec:
-  source:
-    type: Git
-    git:
-      uri: https://github.com/missprempree/etax-api.git
-  strategy:
-    type: Docker
-    dockerStrategy:
-      dockerfilePath: DockerFile  # Ensure this path is correct
   output:
     to:
       kind: DockerImage
       name: docker.io/delenies/etax:latest
-  resources: {}
-  postCommit: {}
-  nodeSelector: null
-  triggers:
-    - type: ConfigChange
+  source:
+    # Expect a local directory to be streamed to OpenShift as a build source
+    type: Binary
+    binary: {}
+  strategy:
+    type: Docker
+    dockerStrategy:
+      # Find the image build instructions in ./Dockerfile
+      dockerfilePath: DockerFile
