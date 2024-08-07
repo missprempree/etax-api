@@ -14,21 +14,6 @@ pipeline {
             }
         }
 
-	stage('Install Maven') {
-            steps {
-                script {
-                    // Define Maven version
-                    def mavenVersion = '4.0.0' // Change to the desired version
-
-                    // Install Maven using yum
-                    sh """
-                    yum install -y java-17
-                    yum install -y maven-$mavenVersion
-                    """
-                }
-            }
-        }
-
 	stage('Java Build') {
             steps {
                 sh 'mvn clean install'
