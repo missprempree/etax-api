@@ -22,6 +22,39 @@ pipeline {
                '''
             }
         }
+
+	stage('Build and Push Image') {
+            steps {
+                script {
+                    // Create BuildConfig
+                    sh '''
+                    oc apply -f - <<EOF
+                    apiVersion: build.openshift.io/v1
+                    kind: BuildConfig
+                    metadata:
+                      labels:
+                        app.kubernetes.io/name: etax
+                      name: etax
+                    spec:
+                      output:
+                        to:
+                          kind: DockerImage
+                          name: docker.io/delenies/etax:latest
+                      source:
+                        type: Binary
+                        binary: {}
+                      strategy:
+                        type: Docker
+                        dockerStrategy:
+                          dockerfilePath: Dockerfile
+                    EOF
+                    '''
+
+                    // Start the build
+                    sh 'oc start-build etax --from-dir=. --follow'
+                }
+            }
+        }	    
     }
 
     post {
