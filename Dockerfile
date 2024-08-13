@@ -30,3 +30,5 @@ EXPOSE 9005
 
 # Command to run the application
 CMD ["java", "-jar", "app.jar"]
+
+LABEL org.opencontainers.image.source=https://github.com/missprempree/etax-api
