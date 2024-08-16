@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: etax-config
+data:
+  SPRING_DATASOURCE_URL: jdbc:sqlserver://10.9.50.174:1433;databaseName=ETAX;encrypt=true;trustServerCertificate=true;
+  SPRING_DATASOURCE_USERNAME: sa
+  SPRING_DATASOURCE_PASSWORD: p@ssw0rd
+  SPRING_JPA_SHOW_SQL: "true"
+  SPRING_JPA_HIBERNATE_DDL_AUTO: update
+  CORS_ALLOWED_ORIGINS: http://localhost:3000
