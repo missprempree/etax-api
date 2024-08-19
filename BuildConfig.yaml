@@ -1,19 +1,17 @@
 apiVersion: build.openshift.io/v1
 kind: BuildConfig
 metadata:
-  labels:
-    app.kubernetes.io/name: etax # your application name
-  name: etax
+  name: etax-api
 spec:
   output:
     to:
       kind: DockerImage
-      name: docker.io/delenies/etax:latest
+      name: 'docker.pkg.github.com/missprempree/etax-api/etax-api-img:latest'
+    pushSecret:
+      name: etax-frontend-pull-secret
   source:
-    type: Git
-    git:
-      uri: https://github.com/missprempree/etax-api
-      ref: master
+    type: Binary
+    binary: {}
   strategy:
     type: Docker
     dockerStrategy:
