@@ -1,9 +1,0 @@
-apiVersion: route.openshift.io/v1
-kind: Route
-metadata:
-  name: etax-route
-spec:
-  host: <your-hostname>
-  to:
-    kind: Service
-    name: etax-service
