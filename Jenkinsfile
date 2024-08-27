@@ -21,6 +21,18 @@ pipeline {
                '''
             }
         }
+
+	stage("Run Ansible Job Template"){
+            steps {
+                ansibleTower jobTemplate: 'yatphiroon-etax-api-job', 
+                            jobType: 'run', 
+                            throwExceptionWhenFail: false, 
+                            towerCredentialsId: 'ansible', 
+                            towerLogLevel: 'false', 
+                            towerServer: 'cd-ansible'
+            }
+        }
+	    
     }
 
     post {
