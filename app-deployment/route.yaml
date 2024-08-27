@@ -1,9 +1,12 @@
-apiVersion: route.openshift.io/v1
+---
 kind: Route
+apiVersion: route.openshift.io/v1
 metadata:
-  name: etax-route
+  name: etax
 spec:
-  host: <your-hostname>
   to:
     kind: Service
     name: etax-service
+  port:
+    targetPort: 9005
+  wildcardPolicy: None
