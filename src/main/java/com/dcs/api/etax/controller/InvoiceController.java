@@ -63,7 +63,7 @@ import java.nio.file.Paths;
 public class InvoiceController {
 
 	
-	private final Path fileStorageLocation = Paths.get("src/main/resources/signed-ETDA-invoice.xml").toAbsolutePath().normalize();
+	private final Path fileStorageLocation = Paths.get("app/src/main/resources/signed-ETDA-invoice.xml").toAbsolutePath().normalize();
      
     @Autowired
     private InvoiceService invoiceService;
@@ -524,7 +524,7 @@ public class InvoiceController {
 					
 					// Create SchemaFactory and Schema
 		            SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-		            Schema schema = schemaFactory.newSchema(new File("src/main/resources/TaxInvoice_CrossIndustryInvoice_2p0.xsd"));
+		            Schema schema = schemaFactory.newSchema(new File("app/src/main/resources/TaxInvoice_CrossIndustryInvoice_2p0.xsd"));
 		            // Create Validator
 		            Validator validator = schema.newValidator();
 		            DOMSource source = new DOMSource(document);
@@ -535,7 +535,7 @@ public class InvoiceController {
 		            System.out.println("========= validing xml schematron =========");
 					
 		            // Load Schematron Schema
-		            ISchematronResource aResSCH = SchematronResourceSCH.fromClassPath("src/main/resources/TaxInvoice_Schematron_2p0.sch");
+		            ISchematronResource aResSCH = SchematronResourceSCH.fromClassPath("app/src/main/resources/TaxInvoice_Schematron_2p0.sch");
 		            if (!aResSCH.isValidSchematron()) {
 		                throw new IllegalArgumentException("Invalid Schematron!");
 		            }
@@ -580,7 +580,7 @@ public class InvoiceController {
 					KeyStore keyStore = KeyStore.getInstance("PKCS12"); // Specify the KeyStore type
 					
 					// Load the KeyStore file
-					File keyStoreFile = new File("src/main/resources/key.p12");
+					File keyStoreFile = new File("app/src/main/resources/key.p12");
 					
 					// Define the signing key/certificate
 					KeyingDataProvider keyProvider = FileSystemKeyStoreKeyingDataProvider.builder(keyStore.getType(),
@@ -1286,7 +1286,7 @@ public class InvoiceController {
 					KeyStore keyStore = KeyStore.getInstance("PKCS12"); // Specify the KeyStore type
 					
 					// Load the KeyStore file
-					File keyStoreFile = new File("src/main/resources/key.p12");
+					File keyStoreFile = new File("app/src/main/resources/key.p12");
 					
 					// Define the signing key/certificate
 					KeyingDataProvider keyProvider = FileSystemKeyStoreKeyingDataProvider.builder(keyStore.getType(),
@@ -1351,13 +1351,13 @@ public class InvoiceController {
 				    /// 1 - Import XML Schema: 
 			        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 			        DocumentBuilder builder = factory.newDocumentBuilder();
-			        Document document = builder.parse(new File("src/main/resources/TaxInvoice_CrossIndustryInvoice_2p0.xsd"));
+			        Document document = builder.parse(new File("app/src/main/resources/TaxInvoice_CrossIndustryInvoice_2p0.xsd"));
 			        /*
 			        Element root = document.createElementNS("http://www.w3.org/2001/XMLSchema-instance", "xsi:import");
-			        root.setAttributeNS("http://www.w3.org/2001/xmlns/", "xmlns:ram", "src/main/resources/TaxInvoice_ReusableAggregateBusinessInformationEntity_2p0.xsd");
-			        root.setAttributeNS("http://www.w3.org/2001/xmlns/", "xmlns:rsm", "src/main/resources/TaxInvoice_CrossIndustryInvoice_2p0.xsd");
+			        root.setAttributeNS("http://www.w3.org/2001/xmlns/", "xmlns:ram", "app/src/main/resources/TaxInvoice_ReusableAggregateBusinessInformationEntity_2p0.xsd");
+			        root.setAttributeNS("http://www.w3.org/2001/xmlns/", "xmlns:rsm", "app/src/main/resources/TaxInvoice_CrossIndustryInvoice_2p0.xsd");
 			        root.setAttributeNS("http://www.w3.org/2001/xmlns/", "xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance");
-			        root.setAttributeNS("http://www.w3.org/2001/XMLSchema-instance", "xsi:schemaLocation", "src/main/resources/TaxInvoice_CrossIndustryInvoice_2p0.xsd");
+			        root.setAttributeNS("http://www.w3.org/2001/XMLSchema-instance", "xsi:schemaLocation", "app/src/main/resources/TaxInvoice_CrossIndustryInvoice_2p0.xsd");
 			         */
 
 					// Element root = document.createElementNS("urn:etda:uncefact:data:standard:TaxInvoice_CrossIndustryInvoice:2", "rsm:Invoice_CrossIndustryInvoice");
@@ -1365,7 +1365,7 @@ public class InvoiceController {
 					root.setAttributeNS("http://www.w3.org/2000/xmlns/", "xmlns:ram", "urn:etda:uncefact:data:standard:TaxInvoice_ReusableAggregateBusinessInformationEntity:2");
 					root.setAttributeNS("http://www.w3.org/2000/xmlns/", "xmlns:rsm", "urn:etda:uncefact:data:standard:TaxInvoice_CrossIndustryInvoice:2");
 					root.setAttributeNS("http://www.w3.org/2000/xmlns/", "xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance");
-					root.setAttributeNS("http://www.w3.org/2001/XMLSchema-instance", "xsi:schemaLocation", "urn:etda:uncefact:data:standard:TaxInvoice_CrossIndustryInvoice:2 src/main/resources/TaxInvoice_CrossIndustryInvoice_2p0.xsd");
+					root.setAttributeNS("http://www.w3.org/2001/XMLSchema-instance", "xsi:schemaLocation", "urn:etda:uncefact:data:standard:TaxInvoice_CrossIndustryInvoice:2 app/src/main/resources/TaxInvoice_CrossIndustryInvoice_2p0.xsd");
 
 					// ######################################################### //
 			        //    Create sub-root element (1) : ExchangedDocumentContext //
@@ -1778,7 +1778,7 @@ public class InvoiceController {
 					KeyStore keyStore = KeyStore.getInstance("PKCS12"); // Specify the KeyStore type
 					
 					// Load the KeyStore file
-					File keyStoreFile = new File("src/main/resources/key.p12");
+					File keyStoreFile = new File("app/src/main/resources/key.p12");
 					
 					// Define the signing key/certificate
 					KeyingDataProvider keyProvider = FileSystemKeyStoreKeyingDataProvider.builder(keyStore.getType(),
@@ -1803,7 +1803,7 @@ public class InvoiceController {
 					
 					// Create SchemaFactory and Schema
 		            SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_INSTANCE_NS_URI);
-		            Schema schema = schemaFactory.newSchema(new File("src/main/resources/TaxInvoice_CrossIndustryInvoice_2p0.xsd"));
+		            Schema schema = schemaFactory.newSchema(new File("app/src/main/resources/TaxInvoice_CrossIndustryInvoice_2p0.xsd"));
 		            Validator validator = schema.newValidator();  // Create Validator
 		            DOMSource source = new DOMSource(document);
 		            validator.validate(source); // Validate the XML Document
@@ -1813,7 +1813,7 @@ public class InvoiceController {
 		            System.out.println("========= Validing xml schematron =========");
 					
 		            // Load Schematron Schema
-		            ISchematronResource aResSCH = SchematronResourceSCH.fromClassPath("src/main/resources/TaxInvoice_Schematron_2p0.sch");
+		            ISchematronResource aResSCH = SchematronResourceSCH.fromClassPath("app/src/main/resources/TaxInvoice_Schematron_2p0.sch");
 		            if (!aResSCH.isValidSchematron()) {
 		                throw new IllegalArgumentException("Invalid Schematron!");
 		            }
