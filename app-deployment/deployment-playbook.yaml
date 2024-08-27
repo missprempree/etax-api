@@ -1,0 +1,31 @@
+---
+- hosts: all
+- hosts: localhost
+
+  collections:
+  - kubernetes.core
+
+  tasks:
+  - name: Get a list of all pods from any namespace
+    kubernetes.core.k8s_info:
+      kind: Pod
+      namespace: ansible-automation-platform
+    register: pod_list
+
+- name: create k8s pod
+    kubernetes.core.k8s:
+      src: deployment.yaml
+      namespace: new-project-yatphiroon
+      state: present
+
+- name: service create
+    kubernetes.core.k8s:
+      src: service.yaml
+      namespace: new-project-yatphiroon
+      state: present
+
+- name: route create
+    kubernetes.core.k8s:
+      src: route.yaml
+      namespace: new-project-yatphiroon
+      state: present
