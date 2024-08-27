@@ -7,9 +7,8 @@
 
   tasks:
 
-  - name: dependancy
-    shell: "pip3 install openshift pyyaml kubernetes; ansible-galaxy collection install kubernetes.core"
-
+  #- name: dependancy
+  #shell: "pip3 install openshift pyyaml kubernetes; ansible-galaxy collection install kubernetes.core"
 
   - name: Get a list of all pods from any namespace
     kubernetes.core.k8s_info:
