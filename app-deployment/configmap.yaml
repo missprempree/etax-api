@@ -3,7 +3,7 @@ kind: ConfigMap
 metadata:
   name: etax-config
 data:
-  SPRING_DATASOURCE_URL: jdbc:sqlserver://10.9.50.174:1433;databaseName=ETAX;encrypt=true;trustServerCertificate=true;
+  SPRING_DATASOURCE_URL: jdbc:sqlserver://10.9.60.112:1433;databaseName=ETAX;encrypt=true;trustServerCertificate=true;
   SPRING_DATASOURCE_USERNAME: sa
   SPRING_DATASOURCE_PASSWORD: p@ssw0rd
   SPRING_JPA_SHOW_SQL: "true"
