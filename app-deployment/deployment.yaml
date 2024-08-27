@@ -1,11 +1,11 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: etax-deployment
+  name: etax-api
   labels:
     app: etax
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: etax
@@ -16,9 +16,10 @@ spec:
     spec:
       containers:
       - name: etax
-        image: docker.io/delenies/etax-docker:latest
+        image: docker.pkg.github.com/missprempree/etax-api/etax-api-img:latest
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "200m"
         ports:
         - containerPort: 9005
-        envFrom:
-        - configMapRef:
-            name: etax-config
