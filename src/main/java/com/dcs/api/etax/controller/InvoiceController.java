@@ -1327,7 +1327,18 @@ public class InvoiceController {
 					KeyStore keyStore = KeyStore.getInstance("PKCS12"); // Specify the KeyStore type
 					
 					// Load the KeyStore file
-					File keyStoreFile = new File("src/main/resources/key.p12");
+					// File keyStoreFile = new File("src/main/resources/key.p12");
+
+					File keyStoreFile = null;
+					try (InputStream keyStoreStream = getClass().getResourceAsStream("/key.p12")) {
+				            if (keyStoreStream == null) {
+				                throw new FileNotFoundException("KeyStore file 'key.p12' not found in classpath.");
+				            }
+				            // Create a temporary file for the KeyStore
+				            Path tempFile = Files.createTempFile("key", ".p12");
+				            Files.copy(keyStoreStream, tempFile, StandardCopyOption.REPLACE_EXISTING);
+				            keyStoreFile = tempFile.toFile();
+				        }
 					
 					// Define the signing key/certificate
 					KeyingDataProvider keyProvider = FileSystemKeyStoreKeyingDataProvider.builder(keyStore.getType(),
