@@ -570,7 +570,7 @@ public class InvoiceController {
 			        }
 
 				   
-		            System.out.println("========= validing xml schematron =========");
+		            System.out.println("========= validating xml schematron =========");
 					
 		            // Load Schematron Schema from classpath
 		            ISchematronResource aResSCH = SchematronResourceSCH.fromClassPath("/TaxInvoice_Schematron_2p0.sch");
@@ -1840,7 +1840,7 @@ public class InvoiceController {
 				    
 				    
 				    /*
-					System.out.println("========= Validing xml schema =========");
+					System.out.println("========= Validating xml schema =========");
 					
 					// Create SchemaFactory and Schema
 		            SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_INSTANCE_NS_URI);
@@ -1851,7 +1851,7 @@ public class InvoiceController {
 		            
 		            System.out.println("**** XML is valid against the XSD ****");
 		            
-		            System.out.println("========= Validing xml schematron =========");
+		            System.out.println("========= Validating xml schematron =========");
 					
 		            // Load Schematron Schema
 		            ISchematronResource aResSCH = SchematronResourceSCH.fromClassPath("src/main/resources/TaxInvoice_Schematron_2p0.sch");
