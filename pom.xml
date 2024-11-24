@@ -74,6 +74,18 @@
 		    <artifactId>ph-schematron</artifactId>
 		    <version>5.6.5</version>
 		</dependency>
+		<!--Swagger #1-->
+		<dependency>
+		    <groupId>org.springdoc</groupId>
+		    <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+		    <version>2.6.0</version>
+		</dependency>
+		<!--Swagger #2-->
+		<dependency>
+		    <groupId>org.springdoc</groupId>
+		    <artifactId>springdoc-openapi-ui</artifactId>
+		    <version>1.7.0</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>
